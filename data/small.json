@@ -1,0 +1,156 @@
+{
+  "product": "事件片段半马尔可夫算子的弱标注与定稿",
+  "nature": "合成演练资料，不包含真实人员、设备或训练数据",
+  "objects": {
+    "episodes": [
+      {
+        "episode_id": "synthetic-eeg-0",
+        "revision": 1,
+        "frame_scores": "scores",
+        "weight": 1,
+        "valid_ranges": [
+          [
+            0,
+            8
+          ]
+        ],
+        "blocks": [
+          [
+            0,
+            3
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            5,
+            8
+          ]
+        ]
+      }
+    ],
+    "types": [
+      "idle",
+      "event"
+    ],
+    "min_duration": [
+      1,
+      2
+    ],
+    "max_duration": [
+      4,
+      4
+    ],
+    "allowed_transition": [
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        1
+      ]
+    ],
+    "annotations": [
+      {
+        "annotation_id": "mark-a",
+        "revision": 1,
+        "interval": [
+          1,
+          6
+        ],
+        "type": 1,
+        "kind": "contains_complete"
+      },
+      {
+        "annotation_id": "mark-b",
+        "revision": 1,
+        "interval": [
+          3,
+          5
+        ],
+        "type": 1,
+        "kind": "overlap_forbid"
+      }
+    ],
+    "later_annotation": {
+      "annotation_id": "mark-c",
+      "revision": 1,
+      "interval": [
+        1,
+        3
+      ],
+      "type": 1,
+      "kind": "overlap_forbid"
+    }
+  },
+  "tensors": {
+    "scores": [
+      [
+        0.2,
+        0.1
+      ],
+      [
+        0.1,
+        0.4
+      ],
+      [
+        0.1,
+        0.5
+      ],
+      [
+        0.3,
+        0.2
+      ],
+      [
+        0.2,
+        0.1
+      ],
+      [
+        0.1,
+        0.3
+      ],
+      [
+        0.2,
+        0.4
+      ],
+      [
+        0.4,
+        0.1
+      ]
+    ],
+    "duration_scores": [
+      [
+        0.1,
+        0.2,
+        0.1,
+        0
+      ],
+      [
+        0,
+        0.2,
+        0.3,
+        0.1
+      ]
+    ],
+    "transition_scores": [
+      [
+        0.1,
+        -0.1
+      ],
+      [
+        0.2,
+        0.1
+      ],
+      [
+        0,
+        0.1
+      ]
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "seed": 149,
+  "length": 4096,
+  "types": 8,
+  "max_duration": 128,
+  "contains_constraints": 6,
+  "max_workspace_bytes": 33554432
+}

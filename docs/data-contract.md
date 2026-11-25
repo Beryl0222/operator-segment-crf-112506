@@ -1,0 +1,5 @@
+# 片段概率与标注数据
+单段连续有效回放长 T，类型数 C，frame_scores:[T,C]，duration_scores:[C,max_duration]，transition_scores:[C+1,C] 最后一行是START。片段 [begin,end) 类型 c 的分数为该段所有frame_scores[t,c]之和加duration_scores[c,end-begin-1]及前类型到c的转移得分，首段用START。每种类型有 min_duration/max_duration，合法相邻类型由布尔 allowed_transition 指定。完整路径无空隙覆盖连续有效回放；缺测范围按两侧独立回放处理，每侧都有START。空有效回放不计训练权重。
+标注 interval 半开；contains_complete 要求在该区间内至少存在一个完整指定类型片段，overlap_forbid 禁止该类型任何帧与区间相交。每条 annotation_id 的当前revision独立存在，撤回只移除该条，所有有效标注共同成立。每个连续有效回放同时激活contains_complete最多6条，forbid最多32条。目标 loss=logZ_structural-logZ_annotations，梯度为两种分布下对应得分计数的期望之差。连续回放按 episode_id 作为样本，窗口以有效episode正权重归一化。结构本身无路径与标注后无路径是不同状态；冲突需能指出一组确实共同无解的有效标注，不要求最小集合。
+未封口可以求当前前缀临时最佳路径，其概率仅属于当前前缀。正式定稿范围必须为一段完整连续回放，并具有 observation_closed 与 annotation_closed；不能把仍连着后续有效帧的任意前缀定稿。边界相遇按score并列时取片段序列(begin,end,type)字典序最小的路径。已定稿后的事实更正产生新revision，旧版本按原资料可查询，不能混入后续训练窗口。训练窗口依赖的观测/标注版本变化时拒绝提交。
+支持T<=4096、C<=8、max_duration<=128、batch<=8。临时区上限32 MiB，不含输入、最终得分梯度和输出分段，禁止保存所有路径；批次可按回放逐个处理。float32输入内部允许float64，logZ/loss atol=3e-4、rtol=1e-4，梯度 atol=5e-4、rtol=3e-3。小样本可穷举路径作数学对照，不作为大容量正式算法。
